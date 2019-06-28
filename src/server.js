@@ -1,4 +1,4 @@
-const app = require('./app');
+import app from './app';
 
 
 // Inicia o servidor na porta 3333
