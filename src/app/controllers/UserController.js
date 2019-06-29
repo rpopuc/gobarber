@@ -73,17 +73,17 @@ class UserController {
     }
 
     // Obtém os dados de entrada
-    const { email, oldPassword } = req.body;
+    const { oldPassword } = req.body;
 
     // Obtém o usuário da base de dados
     const user = await User.findByPk(req.userId);
 
     // Verifica se a alteração
     // implica em um email duplicado
-    if (email !== user.email) {
+    if (req.body.email && req.body.email !== user.email) {
       // Verifica se existe um usuário com o mesmo email
       const userExists = await User.findOne({
-        where: { email },
+        where: { email: req.body.email },
       });
 
       // Se existir, bloqueia a alteração
@@ -102,7 +102,7 @@ class UserController {
     await user.update(req.body);
 
     // Retorna os dados do usuário
-    const { id, name, provider } = user;
+    const { id, name, email, provider } = user;
     return res.json({
       id,
       name,
