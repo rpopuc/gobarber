@@ -1,7 +1,10 @@
 import { Router } from 'express';
+import multer from 'multer';
+import multerConfig from './config/multer';
 
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
+import FileController from './app/controllers/FileController';
 
 // Obtém o middleware de autenticação
 import authMiddleware from './app/middlewares/auth';
@@ -17,7 +20,8 @@ routes.post('/sessions', SessionController.store);
 routes.use(authMiddleware);
 routes.put('/users', authMiddleware, UserController.update);
 
-// Define a rota principal da aplicação
-routes.get('/', (req, res) => res.json({ message: 'Hello World' }));
+// Rota para upload de arquivo
+const upload = multer(multerConfig);
+routes.post('/files', upload.single('file'), FileController.store);
 
 export default routes;
