@@ -1,5 +1,6 @@
+# Applilcation Configuration
 
-## Authentication configuration
+## Authentication
 
 `auth.js`
 
@@ -10,7 +11,7 @@ export default {
 };
 ```
 
-## Database configuration
+## Database
 
 `database.js`
 
