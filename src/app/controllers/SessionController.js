@@ -1,6 +1,13 @@
+// Importa a biblioteca de validação
+import * as Yup from 'yup';
+
+// Importa a biblioteca de manipulação de JWT
 import jwt from 'jsonwebtoken';
 
+// Importa o model do Usuário
 import User from '../models/User';
+
+// Importa as configurações de autenticação
 import authConfig from '../../config/auth';
 
 /**
@@ -12,6 +19,19 @@ class SessionController {
    * Retorna o token JWT de autenticação
    */
   async store(req, res) {
+    // Define as regras de validação dos dados de entrada
+    const schema = Yup.object().shape({
+      email: Yup.string()
+        .email()
+        .required(),
+      password: Yup.string().required(),
+    });
+
+    // Verifica se as regras de validação foram obedecidas
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
     // Obtém os dados de entrada
     const { email, password } = req.body;
 
