@@ -1,0 +1,4 @@
+export default {
+  secret: '98520345-09a3-4a31-9e6d-3dcfdb7b667d',
+  expiresIn: '7d',
+};
