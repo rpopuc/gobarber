@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  postgres:
+    image: rpopuc/postgres:11
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=app
+      - POSTGRES_DB=app
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
