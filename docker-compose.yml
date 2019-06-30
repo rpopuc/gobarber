@@ -8,6 +8,13 @@ services:
       - POSTGRES_PASSWORD=app
       - POSTGRES_DB=app
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./data/postgres:/var/lib/postgresql/data
     ports:
       - 5432:5432
+
+  mongo:
+    image: mongo:4-xenial
+    volumes:
+      - ./data/mongo:/data/db
+    ports:
+      - 27017:27017
